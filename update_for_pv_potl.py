@@ -45,15 +45,7 @@ for r in range(1, sheet.nrows):
   values = (pv_potl, rs_id)
   print (f" {rs_id} at {st_num} {st_name} has solar potential = {pv_potl} ")
 
-  try:
-      cursor.execute(update_query, values)
-      database.commit()
-  
-  except mysql.connector.Error as err:
-    print(err)
-    print("Error Code:", err.errno)
-    print("SQLSTATE", err.sqlstate)
-    print("Message", err.msg)
+# cursor.execute(update_query, values)
 #
 # Commit changes
-#database.commit()
+# database.commit()
