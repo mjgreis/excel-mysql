@@ -11,7 +11,7 @@ import xlrd
 import mysql.connector
 #
 # Open Excel workbook; read sheet into "sheet"
-book = xlrd.open_workbook(r"C:\Documents\Needham\Green Needham\Projects\Solarize Plus\Solarize_assessed_addresses_pct_h.xlsx")
+book = xlrd.open_workbook(r"C:\Documents\Needham\Green Needham\Projects\Solarize Plus\Solarize_assessed_addresses_pct_e.xlsx")
 sheet = book.sheet_by_name("Load")
 #
 # Open MySQL connection 
@@ -45,7 +45,15 @@ for r in range(1, sheet.nrows):
   values = (pv_potl, rs_id)
   print (f" {rs_id} at {st_num} {st_name} has solar potential = {pv_potl} ")
 
-# cursor.execute(update_query, values)
+  try:
+      cursor.execute(update_query, values)
+      database.commit()
+  
+  except mysql.connector.Error as err:
+    print(err)
+    print("Error Code:", err.errno)
+    print("SQLSTATE", err.sqlstate)
+    print("Message", err.msg)
 #
 # Commit changes
 # database.commit()
